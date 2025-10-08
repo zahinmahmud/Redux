@@ -1,0 +1,27 @@
+import React, { createContext, useContext, useState } from "react";
+
+// Create Context
+const ThemeContext = createContext();
+
+function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+      <Header />
+    </ThemeContext.Provider>
+  );
+}
+
+function Header() {
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
+
+  return (
+    <header style={{ background: darkMode ? "black" : "lightgray", color: darkMode ? "white" : "black" }}>
+      <h2>{darkMode ? "Dark Mode" : "Light Mode"}</h2>
+      <button onClick={() => setDarkMode(!darkMode)}>Toggle Mode</button>
+    </header>
+  );
+}
+
+export default App;
